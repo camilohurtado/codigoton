@@ -2,6 +2,7 @@ package com.codigoton.service.invitation;
 
 import com.codigoton.dto.ClientDTO;
 import com.codigoton.dto.FilterDTO;
+import com.codigoton.dto.InvitationResponse;
 import com.codigoton.helper.AccountBalanceRange;
 import com.codigoton.helper.TotalBalanceCalculator;
 import com.codigoton.service.information.ClientInfoService;
@@ -9,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,13 +24,14 @@ public class InvitationServiceImpl implements InvitationService{
     public final ClientInfoService clientInfoService;
 
     @Override
-    public Map<String, List<String>> setupInvitations(List<FilterDTO> filter) {
-        Map<String, List<String>> result = new HashMap<>();
+    public List<InvitationResponse> setupInvitations(List<FilterDTO> filter) {
+        List<InvitationResponse> result = new ArrayList<>();
 
         if(filter != null && !filter.isEmpty()){
             filter.stream().forEach(filterDTO -> {
 
                 List<ClientDTO> clients = clientInfoService.getAllClientsByFilter(filterDTO.getCodUbicacionGeo(), filterDTO.getTipoDeCliente());
+                InvitationResponse invitationResponse = new InvitationResponse();
 
                 if(clients != null && !clients.isEmpty() && clients.size() > 4){
 
@@ -46,14 +47,17 @@ public class InvitationServiceImpl implements InvitationService{
                             .map(ClientDTO::getCode)
                             .collect(Collectors.toList());
 
+                    invitationResponse.setTable(filterDTO.getMesa());
                     if(codes.size() < 4){
-                        result.put(filterDTO.getMesa(), List.of("CANCELADA"));
+                        invitationResponse.setStatus("CANCELADA");
                     }else{
-                        result.put(filterDTO.getMesa(), codes);
+                        invitationResponse.setListOfGuests(codes);
                     }
                 }else{
-                    result.put(filterDTO.getMesa(), List.of("CANCELADA"));
+                    invitationResponse.setTable(filterDTO.getMesa());
+                    invitationResponse.setStatus("CANCELADA");
                 }
+                result.add(invitationResponse);
             });
         }
         return result;

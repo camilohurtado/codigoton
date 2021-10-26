@@ -1,10 +1,10 @@
 package com.codigoton.service.invitation;
 
 import com.codigoton.dto.FilterDTO;
+import com.codigoton.dto.InvitationResponse;
 
 import java.util.List;
-import java.util.Map;
 
 public interface InvitationService {
-    public Map<String, List<String>> setupInvitations(List<FilterDTO> filter);
+    public List<InvitationResponse> setupInvitations(List<FilterDTO> filter);
 }
