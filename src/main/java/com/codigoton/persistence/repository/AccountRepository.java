@@ -2,12 +2,14 @@ package com.codigoton.persistence.repository;
 
 import com.codigoton.persistence.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Long, Account> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    List<Account> findAllByClientId(long clientId);
+    @Query("select a from Account a where a.clientId = ?1")
+    List<Account> findByClientId(long clientId);
 }
