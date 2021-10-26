@@ -1,9 +1,7 @@
 package com.codigoton.persistence.model;
 
 import com.codigoton.dto.AccountDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,15 +11,17 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(name = "id")
     private long id;
-    @Column private long clientId;
-    @Column private double balance;
+    @Column(name = "client_id") private long clientId;
+    @Column(name = "balance") private double balance;
 
     public static AccountDTO toDTO(Account account){
         return AccountDTO.builder()
