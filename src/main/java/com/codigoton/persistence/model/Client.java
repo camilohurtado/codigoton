@@ -1,8 +1,7 @@
 package com.codigoton.persistence.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import com.codigoton.dto.ClientDTO;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +11,8 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Client {
 
@@ -25,4 +26,17 @@ public class Client {
     @Column private String location;
     @Column private String company;
     @Column private char encrypt;
+
+    public static ClientDTO toDTO(Client client){
+
+        return ClientDTO.builder()
+                .id(client.id)
+                .code(client.code)
+                .company(client.company)
+                .encrypt(client.encrypt)
+                .location(client.location)
+                .male(client.male)
+                .type(client.type)
+                .build();
+    }
 }
