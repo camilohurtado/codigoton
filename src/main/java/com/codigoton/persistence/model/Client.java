@@ -1,11 +1,9 @@
 package com.codigoton.persistence.model;
 
-import com.codigoton.dto.AccountDTO;
 import com.codigoton.dto.ClientDTO;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @author Camilo Hurtado
