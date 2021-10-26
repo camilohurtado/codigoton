@@ -1,14 +1,14 @@
 package com.codigoton.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author Camilo Hurtado
  */
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
 public class AccountDTO {
     private long id;
