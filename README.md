@@ -1,7 +1,7 @@
 # Codigoton
 Bancolombia codigoton
 
-This is a personal project, intented to solve a programming excersise for a Hackaton. The description of the problem is in the file named: 
+This is a personal project, intented to solve a programming excersise for a Hackaton. The description of the problem is in the file named: problem-statement.pdf
 
 ## Tech stack
 - Java 11
