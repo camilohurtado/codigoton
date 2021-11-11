@@ -43,8 +43,8 @@ public class InvitationServiceImpl implements InvitationService{
 
                     List<String> codes = Stream.concat(menStream, womenStream)
                             .sorted(compareTotalBalances)
-                            .limit(8)
                             .map(ClientDTO::getCode)
+                            .limit(8)
                             .collect(Collectors.toList());
 
                     invitationResponse.setTable(filterDTO.getMesa());
